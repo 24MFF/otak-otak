@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modal QRIS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex !important;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-test {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .btn-test:hover {
+            transform: translateY(-2px);
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test Modal QRIS</h1>
+    <p>Klik tombol di bawah untuk test apakah modal bisa muncul:</p>
+
+    <button class="btn-test" onclick="testShowModal()">Test Show Modal</button>
+    <button class="btn-test" onclick="testHideModal()">Test Hide Modal</button>
+    <button class="btn-test" onclick="checkModalExists()">Check Modal Exists</button>
+
+    <div id="status"></div>
+
+    <!-- Modal Test -->
+    <div id="qrisModal" class="modal">
+        <div class="modal-content">
+            <h2>✅ Modal Berhasil Muncul!</h2>
+            <p>Jika Anda bisa melihat ini, berarti modal berfungsi dengan baik.</p>
+            <p id="qrisAmount" style="font-size: 24px; font-weight: bold; color: #667eea;">Rp 50,000</p>
+            <button class="btn-test" onclick="testHideModal()">Tutup Modal</button>
+        </div>
+    </div>
+
+    <script>
+        function log(message) {
+            const status = document.getElementById('status');
+            const time = new Date().toLocaleTimeString();
+            status.innerHTML += `[${time}] ${message}<br>`;
+            console.log(message);
+        }
+
+        function testShowModal() {
+            log('Mencoba menampilkan modal...');
+            const modal = document.getElementById('qrisModal');
+
+            if (!modal) {
+                log('❌ ERROR: Modal tidak ditemukan!');
+                return;
+            }
+
+            log('✅ Modal element ditemukan');
+            log('Classes sebelum: ' + modal.className);
+
+            modal.classList.add('show');
+
+            log('Classes sesudah: ' + modal.className);
+            log('Display style: ' + window.getComputedStyle(modal).display);
+
+            if (modal.classList.contains('show')) {
+                log('✅ Class "show" berhasil ditambahkan');
+            } else {
+                log('❌ Class "show" GAGAL ditambahkan');
+            }
+        }
+
+        function testHideModal() {
+            log('Mencoba menyembunyikan modal...');
+            const modal = document.getElementById('qrisModal');
+
+            if (!modal) {
+                log('❌ ERROR: Modal tidak ditemukan!');
+                return;
+            }
+
+            modal.classList.remove('show');
+            log('✅ Modal disembunyikan');
+            log('Classes: ' + modal.className);
+        }
+
+        function checkModalExists() {
+            log('Memeriksa keberadaan modal...');
+            const modal = document.getElementById('qrisModal');
+
+            if (modal) {
+                log('✅ Modal EXISTS di DOM');
+                log('ID: ' + modal.id);
+                log('Classes: ' + modal.className);
+                log('Display: ' + window.getComputedStyle(modal).display);
+                log('Position: ' + window.getComputedStyle(modal).position);
+                log('Z-index: ' + window.getComputedStyle(modal).zIndex);
+            } else {
+                log('❌ Modal TIDAK DITEMUKAN di DOM!');
+            }
+        }
+
+        // Auto check on load
+        window.addEventListener('load', () => {
+            log('=== Page Loaded ===');
+            checkModalExists();
+        });
+    </script>
+</body>
+
+</html>
