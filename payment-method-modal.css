@@ -1,0 +1,208 @@
+/* ===================================
+   PAYMENT METHOD SELECTION MODAL (SHOPEE STYLE)
+   =================================== */
+
+.payment-method-modal {
+    max-width: 480px;
+    width: 90%;
+}
+
+.payment-method-modal h2 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-5);
+    text-align: center;
+}
+
+/* Payment Summary */
+.payment-summary {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    margin-bottom: var(--spacing-5);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-label {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--font-weight-medium);
+}
+
+.summary-amount {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: white;
+}
+
+/* Payment Methods Container */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-5);
+}
+
+/* Payment Method Card */
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-method-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.payment-method-card:hover::before {
+    left: 100%;
+}
+
+.payment-method-card:hover {
+    border-color: #FF6B35;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+}
+
+.payment-method-card:active {
+    transform: translateY(0);
+}
+
+/* Method Icon */
+.method-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+}
+
+.method-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.dana-icon {
+    background: linear-gradient(135deg, #00AED6 0%, #0088A8 100%);
+    color: white;
+}
+
+.bank-icon {
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    color: white;
+}
+
+.cash-icon {
+    background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
+    color: white;
+}
+
+.payment-method-card:hover .method-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Method Info */
+.method-info {
+    flex: 1;
+}
+
+.method-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin-bottom: 2px;
+}
+
+.method-desc {
+    font-size: var(--font-size-xs);
+    color: var(--gray-700);
+}
+
+/* Method Arrow */
+.method-arrow {
+    flex-shrink: 0;
+    font-size: 28px;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-base);
+}
+
+.payment-method-card:hover .method-arrow {
+    color: #FF6B35;
+    transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    .payment-method-modal {
+        max-width: 95%;
+    }
+
+    .payment-method-modal h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .summary-amount {
+        font-size: var(--font-size-xl);
+    }
+
+    .method-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .method-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .method-name {
+        font-size: var(--font-size-sm);
+    }
+
+    .method-desc {
+        font-size: 11px;
+    }
+}
+
+/* Animation for modal appearance */
+.payment-method-modal {
+    animation: slideUpFadeIn 0.3s ease-out;
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
